@@ -1,0 +1,143 @@
+{
+  "plugin_type": "loaders",
+  "name": "target-motherduck",
+  "namespace": "target_motherduck",
+  "variant": "meltanolabs",
+  "label": "MotherDuck",
+  "docs": "https://www.matatika.com/data-details/target-motherduck/",
+  "repo": "https://github.com/MeltanoLabs/target-duckdb",
+  "pip_url": "git+https://github.com/MeltanoLabs/target-duckdb.git@v0.11.1 duckdb==1.5.4",
+  "description": "The cloud data warehouse built for answers, in SQL or natural language.\nFast, serverless analytics powered by DuckDB\u2013from production apps to internal insights.",
+  "logo_url": "/assets/logos/loaders/duckdb.png",
+  "settings": [
+    {
+      "name": "connection_string",
+      "kind": "string",
+      "label": "MotherDuck Connection String",
+      "description": "The MotherDuck connection string.",
+      "placeholder": "md:my_database",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "token",
+      "kind": "string",
+      "label": "MotherDuck Token",
+      "description": "Your MotherDuck token.",
+      "hidden": false,
+      "sensitive": true,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "batch_size_rows",
+      "kind": "integer",
+      "value": 100000,
+      "label": "Batch Size Rows",
+      "description": "The number of rows to load into DuckDB at a time.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "flush_all_streams",
+      "kind": "boolean",
+      "value": false,
+      "label": "Flush All Streams",
+      "description": "Whether to flush all streams after loading data into DuckDB.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "default_target_schema",
+      "kind": "string",
+      "value": "$MELTANO_EXTRACT__LOAD_SCHEMA",
+      "label": "Default Target Schema",
+      "description": "The default schema to use when loading data into DuckDB.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "schema_mapping",
+      "kind": "object",
+      "label": "schema_mapping",
+      "description": "A mapping of input schema names to output schema names.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "add_metadata_columns",
+      "kind": "boolean",
+      "value": false,
+      "label": "Add Metadata Columns",
+      "description": "Whether to add metadata columns to the output table.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "hard_delete",
+      "kind": "boolean",
+      "value": false,
+      "label": "Hard Delete",
+      "description": "Whether to perform a hard delete when deleting data from DuckDB.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "data_flattening_max_level",
+      "kind": "integer",
+      "value": 0,
+      "label": "Data Flattening Max Level",
+      "description": "The maximum level of data flattening to perform when loading data into DuckDB.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "primary_key_required",
+      "kind": "boolean",
+      "value": true,
+      "label": "Primary Key Required",
+      "description": "Whether a primary key is required for the output table.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "validate_records",
+      "kind": "boolean",
+      "value": false,
+      "label": "Validate Records",
+      "description": "Whether to validate records before loading them into DuckDB.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "temp_dir",
+      "kind": "string",
+      "label": "Temporary Directory",
+      "description": "The directory to use for temporary files when loading data into DuckDB.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    }
+  ]
+}
