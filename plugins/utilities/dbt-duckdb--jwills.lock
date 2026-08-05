@@ -1,0 +1,145 @@
+{
+  "plugin_type": "utilities",
+  "name": "dbt-duckdb",
+  "namespace": "dbt_duckdb",
+  "variant": "jwills",
+  "label": "dbt DuckDB",
+  "docs": "https://www.matatika.com/data-details/dbt-duckdb/",
+  "repo": "https://github.com/jwills/dbt-duckdb",
+  "pip_url": "dbt-core~=1.3.0 dbt-duckdb~=1.3.0 git+https://github.com/meltano/dbt-ext.git@main",
+  "executable": "dbt_invoker",
+  "description": "DuckDB is an open-source analytical SQL database management system.\n\nDuckDB is a high-performance analytical SQL database management system designed to handle complex queries and data-intensive workloads. It is optimized for read-heavy workloads and can handle large datasets with ease. DuckDB is designed to be easy to use and can be integrated with popular data science tools like Python and R. It also supports standard SQL syntax and has a wide range of built-in functions for data manipulation and analysis. DuckDB is open-source and can be used for free by anyone.",
+  "logo_url": "/assets/logos/utilities/dbt.png",
+  "settings": [
+    {
+      "name": "skip_pre_invoke",
+      "env": "DBT_EXT_SKIP_PRE_INVOKE",
+      "kind": "boolean",
+      "value": false,
+      "label": "Skip Pre-invoke",
+      "description": "Skips the pre-invoke hook when connecting to the dbt DuckDB API.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "type",
+      "env": "DBT_EXT_TYPE",
+      "kind": "string",
+      "value": "duckdb",
+      "label": "dbt Profile type",
+      "description": "Specifies the type of dbt profile to use when connecting to the dbt DuckDB API.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "project_dir",
+      "env": "DBT_PROJECT_DIR",
+      "kind": "string",
+      "value": "$MELTANO_PROJECT_ROOT/transform",
+      "label": "Projects Directory",
+      "description": "Specifies the directory where dbt projects are located.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "profiles_dir",
+      "env": "DBT_PROFILES_DIR",
+      "kind": "string",
+      "value": "$MELTANO_PROJECT_ROOT/transform/profiles/duckdb",
+      "label": "Profiles Directory",
+      "description": "Specifies the directory where dbt profiles are located.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "path",
+      "kind": "string",
+      "value": "${MELTANO_PROJECT_ROOT}/output/warehouse.duckdb",
+      "label": "Path",
+      "description": "Specifies the path to the dbt project to connect to.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "schema",
+      "kind": "string",
+      "value": "main",
+      "label": "Schema",
+      "description": "Specifies the schema to use when connecting to the dbt DuckDB API.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    }
+  ],
+  "commands": {
+    "debug": {
+      "args": "debug",
+      "description": "Debug your DBT project and warehouse connection."
+    },
+    "test": {
+      "args": "test",
+      "description": "Runs tests on data in deployed models."
+    },
+    "seed": {
+      "args": "seed",
+      "description": "Load data from csv files into your data warehouse."
+    },
+    "run": {
+      "args": "run",
+      "description": "Compile SQL and execute against the current target database."
+    },
+    "deps": {
+      "args": "deps",
+      "description": "Pull the most recent version of the dependencies listed in packages.yml"
+    },
+    "clean": {
+      "args": "clean",
+      "description": "Delete all folders in the clean-targets list (usually the dbt_modules and target directories.)"
+    },
+    "freshness": {
+      "args": "source freshness",
+      "description": "Check the freshness of your source data."
+    },
+    "docs-generate": {
+      "args": "docs generate",
+      "description": "Generate documentation for your project."
+    },
+    "compile": {
+      "args": "compile",
+      "description": "Generates executable SQL from source model, test, and analysis files. Compiled SQL files are written to the target/ directory."
+    },
+    "build": {
+      "args": "build",
+      "description": "Will run your models, tests, snapshots and seeds in DAG order."
+    },
+    "docs-serve": {
+      "args": "docs serve",
+      "description": "Serve documentation for your project. Make sure you ran `docs-generate` first."
+    },
+    "initialize": {
+      "args": "initialize",
+      "description": "Initialize a new dbt project. This will create a dbt_project.yml file, a profiles.yml file, and models directory.\n",
+      "executable": "dbt_extension"
+    },
+    "describe": {
+      "args": "describe",
+      "description": "Describe the",
+      "executable": "dbt_extension"
+    },
+    "snapshot": {
+      "args": "snapshot",
+      "description": "Execute snapshots defined in your project."
+    }
+  }
+}
