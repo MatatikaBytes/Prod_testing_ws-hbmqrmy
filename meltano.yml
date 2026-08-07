@@ -10,6 +10,12 @@ plugins:
   - name: tap-meltano-cloud
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/tap-meltano-cloud.git@v0.1.6
+  - name: tap-surveymonkey
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-surveymonkey.git@v0.1.0
+  - name: tap-surveymonkey-privateapp
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-surveymonkey.git@v0.1.0
   loaders:
   - name: target-postgres
     variant: matatika
