@@ -1,0 +1,78 @@
+{
+  "plugin_type": "extractors",
+  "name": "tap-aptem",
+  "namespace": "tap_aptem",
+  "variant": "matatika",
+  "label": "Aptem",
+  "docs": "https://www.matatika.com/data-details/tap-aptem/",
+  "repo": "https://github.com/Matatika/tap-aptem",
+  "pip_url": "git+https://github.com/Matatika/tap-aptem.git@v0.1.0",
+  "description": "Aptem is an end-to-end apprenticeship and vocational training management platform used by\ntraining providers and employers to manage learner enrolment, programme delivery, progress\ntracking, compliance, and end-point assessment.\n\n### Prerequisites\n\nTo connect to Aptem, you will need:\n\n- An **API token** for the Aptem OData API.\n- Your Aptem **tenant name**, which is used to build the API base URL.\n\n### Setup\n\nIn Meltano Cloud:\n\n1. Enter your Aptem API token\n1. Enter your Aptem tenant name\n1. Optionally choose a start date for extraction\n\n### Available Streams\n\nThis tap discovers streams dynamically from the Aptem OData service `$metadata` document, so\nthe exact set of streams reflects the entities and related collections exposed by your tenant.\n\nThe following streams are recognised by the tap:\n\n- `AimWorkPlacements`\n- `ApprenticeshipFinancialRecords`\n- `AptemCognitiveAssessments`\n- `AwardingBodyQualifications`\n- `AwardingBodyQualificationsAssessmentHistory`\n- `ComplianceDocuments`\n- `ComponentDueDateChanges`\n- `CrmActivities`\n- `DestinationProgressions`\n- `EmployerGroups`\n- `EPAErrors`\n- `Episodes`\n- `Groups`\n- `HoursRecords`\n- `IlrAims`\n- `IlrLearner`\n- `Jobs`\n- `LearnerEmployment`\n- `LearningPlanComponents`\n- `LearningPlanEvidences`\n- `LearningPlanEvidenceWithActivityData`\n- `MaximumProgrammeDataFields`\n- `Messages`\n- `Milestones`\n- `Notes`\n- `OnboardingResponses`\n- `OrganizationContacts`\n- `Organizations`\n- `ReviewResponses`\n- `Reviews`\n- `Tasks`\n- `Trackers`\n- `Users`\n- `UserGroups`\n- `WithdrawalReasons`\n\nAdditional related collections embedded within these entities are also discovered and\nextracted as their own streams.\n\nStreams with a known replication key are replicated incrementally; the rest are replicated\nin full on each run. If you find a stream is not behaving incrementally when it exposes a\nsuitable date column, you can set a replication key configuration for the plugin under\n`metadata` in your `meltano.yml`:\n\n```yml\nplugins:\n  extractors:\n  - name: tap-aptem\n    variant: matatika\n    pip_url: git+https://github.com/Matatika/tap-aptem.git@v0.1.0\n    config:\n    metadata:\n      <stream_name>:  # Aptem stream name\n        replication-method: INCREMENTAL\n        replication-key: <field_name>  # a date column exposed by the stream\n```\n\nPlease also open an issue [here](https://github.com/Matatika/tap-aptem/issues/new?title=feat:%20Register%20replication%20key%20for%20stream%20`%3Cstream_name%3E`&body=Replication%20key:%20`%3Cfield_name%3E`&labels=enhancement&type=feature)\nto register any missing configurations in the tap. Future version updates that include related\nchanges would no longer require corresponding `metadata` entries, as above.\n",
+  "logo_url": "/assets/logos/extractors/aptem.png",
+  "capabilities": [
+    "stream-maps",
+    "about",
+    "activate-version",
+    "discover",
+    "schema-flattening",
+    "state",
+    "catalog",
+    "structured-logging",
+    "batch"
+  ],
+  "settings": [
+    {
+      "name": "api_token",
+      "kind": "string",
+      "label": "API Token",
+      "description": "API token for the Aptem OData API",
+      "hidden": false,
+      "sensitive": true,
+      "required": "true",
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "tenant_name",
+      "kind": "string",
+      "label": "Tenant Name",
+      "description": "Aptem tenant name used to build the base URL.",
+      "hidden": false,
+      "sensitive": false,
+      "required": "true",
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "start_date",
+      "kind": "date_iso8601",
+      "label": "Start Date",
+      "description": "The earliest record date to sync",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "stream_maps",
+      "kind": "object",
+      "label": "Stream Maps",
+      "description": "Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html).",
+      "hidden": true,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "emit_activate_version_messages",
+      "kind": "boolean",
+      "value": false,
+      "label": "Emit `ACTIVATE_VERSION` messages",
+      "description": "Whether to emit `ACTIVATE_VERSION` messages. If set to `True`, the tap will emit `ACTIVATE_VERSION` messages for each stream.",
+      "hidden": true,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    }
+  ]
+}
