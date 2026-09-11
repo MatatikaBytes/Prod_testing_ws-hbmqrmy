@@ -1,0 +1,8 @@
+version: pipelines/v0.1
+label: Spreadsheets Gmail
+timeout: 0
+max_retries: 0
+data_components:
+- tap-spreadsheets-gmail
+- Warehouse
+- dbt
