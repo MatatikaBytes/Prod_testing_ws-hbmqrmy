@@ -1,0 +1,480 @@
+{
+  "plugin_type": "loaders",
+  "name": "target-clickhouse",
+  "namespace": "clickhouse",
+  "variant": "meltanolabs",
+  "label": "ClickHouse",
+  "docs": "https://www.matatika.com/data-details/target-clickhouse/",
+  "repo": "https://github.com/MeltanoLabs/target-clickhouse",
+  "pip_url": "'target-clickhouse @ git+https://github.com/MeltanoLabs/target-clickhouse.git@v0.4.1'",
+  "description": "ClickHouse is a high-performance, column-oriented SQL database management\nsystem for online analytical processing (OLAP).\n\nClickHouse stores data in columns and uses a vectorised query execution\nengine, which makes it extremely fast for analytical queries over very large\ndatasets. It supports a range of table engines (MergeTree, ReplacingMergeTree,\nReplicatedMergeTree, and others), real-time data ingestion, and standard SQL.\nClickHouse is widely used for analytics, observability, and data warehousing\nworkloads where low-latency aggregation over billions of rows is required.\n\nBecause ClickHouse does not support row-level updates natively, upsert\nbehaviour is emulated using a ReplacingMergeTree engine together with\n`OPTIMIZE TABLE`. Set `engine_type` to `ReplacingMergeTree` and enable\n`optimize_after` to deduplicate on the ordering key after each load. Note that\nClickHouse has no separate schema namespace \u2014 a database *is* the schema.\n\n### Arrow `BATCH` message support\n\nThis target accepts Arrow-encoded Singer `BATCH` messages with no additional\nconfiguration. See\n[BATCH ingestion](https://docs.meltano.com/meltano-cloud/connect-a-store/clickhouse-store/#batch-ingestion)\nfor details.\n",
+  "logo_url": "/assets/logos/loaders/clickhouse.png",
+  "capabilities": [
+    "hard-delete",
+    "activate-version",
+    "about",
+    "structured-logging",
+    "schema-flattening",
+    "stream-maps",
+    "batch"
+  ],
+  "settings": [
+    {
+      "name": "sqlalchemy_url",
+      "kind": "string",
+      "label": "SQLAlchemy URL",
+      "description": "A full SQLAlchemy connection string for the ClickHouse database. If set, it takes precedence over the individual host/port/username/password settings.\n",
+      "hidden": false,
+      "sensitive": true,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "host",
+      "kind": "string",
+      "label": "Host",
+      "description": "ClickHouse host",
+      "hidden": false,
+      "sensitive": false,
+      "required": "true",
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "port",
+      "kind": "integer",
+      "value": 8123,
+      "label": "Port",
+      "description": "ClickHouse connection port. Use 8123 for the HTTP driver (8443 when `secure` is enabled), or 9000 for the native driver.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "driver",
+      "kind": "options",
+      "value": "http",
+      "label": "Driver",
+      "description": "The client driver used to connect. `http` (default) uses the native column-oriented bulk-insert path over the HTTP interface; `native` and `asynch` use the ClickHouse native protocol.\n",
+      "options": [
+        {
+          "label": "HTTP",
+          "value": "http"
+        },
+        {
+          "label": "Native",
+          "value": "native"
+        },
+        {
+          "label": "Asynch",
+          "value": "asynch"
+        }
+      ],
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "username",
+      "kind": "string",
+      "value": "default",
+      "label": "Username",
+      "description": "ClickHouse username",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "password",
+      "kind": "string",
+      "label": "Password",
+      "description": "ClickHouse password",
+      "hidden": false,
+      "sensitive": true,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "database",
+      "kind": "string",
+      "label": "Database",
+      "description": "ClickHouse database (ClickHouse has no separate schema \u2014 the database is the schema).",
+      "hidden": false,
+      "sensitive": false,
+      "required": "true",
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "secure",
+      "kind": "boolean",
+      "value": false,
+      "label": "Secure (TLS)",
+      "description": "Connect over HTTPS/TLS. Enable for ClickHouse Cloud and other TLS-terminated endpoints; remember to set the port to 8443.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "verify",
+      "kind": "boolean",
+      "value": true,
+      "label": "Verify SSL/TLS",
+      "description": "When `secure` is enabled, whether to verify the server's SSL/TLS certificate.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "ssh_tunnel.enable",
+      "kind": "boolean",
+      "value": false,
+      "label": "SSH Tunnel Enable",
+      "description": "Enable an ssh tunnel (also known as bastion host), see the other ssh_tunnel.* properties for more details",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "ssh_tunnel.host",
+      "kind": "string",
+      "label": "SSH Tunnel Host",
+      "description": "Host of the bastion host, this is the host we'll connect to via ssh",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "ssh_tunnel.port",
+      "kind": "integer",
+      "value": 22,
+      "label": "SSH Tunnel Port",
+      "description": "Port to connect to bastion host",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "ssh_tunnel.private_key",
+      "kind": "string",
+      "label": "SSH Tunnel Private Key",
+      "description": "A base64 encoded Private Key for authentication to the bastion host w/ key pair auth",
+      "hidden": false,
+      "sensitive": true,
+      "encoding": "base64",
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "ssh_tunnel.private_key_password",
+      "kind": "string",
+      "label": "SSH Tunnel Private Key Password",
+      "description": "Private Key Password, leave None if no password is set",
+      "hidden": false,
+      "sensitive": true,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "ssh_tunnel.username",
+      "kind": "string",
+      "label": "SSH Tunnel Username",
+      "description": "Username to connect to bastion host",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "ssh_tunnel.host_setting_name",
+      "kind": "string",
+      "value": "host",
+      "hidden": true,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "ssh_tunnel.port_setting_name",
+      "kind": "string",
+      "value": "port",
+      "hidden": true,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "default_target_schema",
+      "kind": "string",
+      "label": "Default Target Schema",
+      "description": "The default target database to write all streams to. ClickHouse has no schema namespace distinct from the database, so this is effectively the target database override.\n",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "engine_type",
+      "kind": "options",
+      "value": "ReplacingMergeTree",
+      "label": "Engine Type",
+      "description": "The ClickHouse table engine to use when creating target tables. Defaults to ReplacingMergeTree (with `optimize_after`) for upsert-style deduplication; streams without a primary key automatically fall back to MergeTree so their rows are never collapsed. Use MergeTree for plain append-only loads. The `Replicated*` and cluster engines additionally require `table_path`, `replica_name`, and `cluster_name`.\n",
+      "options": [
+        {
+          "label": "MergeTree",
+          "value": "MergeTree"
+        },
+        {
+          "label": "ReplacingMergeTree",
+          "value": "ReplacingMergeTree"
+        },
+        {
+          "label": "SummingMergeTree",
+          "value": "SummingMergeTree"
+        },
+        {
+          "label": "AggregatingMergeTree",
+          "value": "AggregatingMergeTree"
+        },
+        {
+          "label": "ReplicatedMergeTree",
+          "value": "ReplicatedMergeTree"
+        },
+        {
+          "label": "ReplicatedReplacingMergeTree",
+          "value": "ReplicatedReplacingMergeTree"
+        },
+        {
+          "label": "ReplicatedSummingMergeTree",
+          "value": "ReplicatedSummingMergeTree"
+        },
+        {
+          "label": "ReplicatedAggregatingMergeTree",
+          "value": "ReplicatedAggregatingMergeTree"
+        }
+      ],
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "table_name",
+      "kind": "string",
+      "label": "Table Name",
+      "description": "The name of the table to write to. Defaults to the stream name.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "table_path",
+      "kind": "string",
+      "label": "Table Path",
+      "description": "The table path for replicated tables \u2014 required when using any of the Replicated* engines. Use `$table_name` to substitute the table name. See the ClickHouse ReplicatedMergeTree documentation.\n",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "replica_name",
+      "kind": "string",
+      "label": "Replica Name",
+      "description": "The `replica_name` for replicated tables \u2014 required when using any of the Replicated* engines.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "cluster_name",
+      "kind": "string",
+      "label": "Cluster Name",
+      "description": "The cluster to create tables in, passed as the `clickhouse_cluster` argument on table creation (ON CLUSTER). Required for cluster/replicated setups.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "order_by_keys",
+      "kind": "array",
+      "label": "Order By Keys",
+      "description": "List of columns to order by (ORDER BY key). Used for engines that require an ordering key; for ReplacingMergeTree this is the dedup key.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "optimize_after",
+      "kind": "boolean",
+      "value": true,
+      "label": "Optimize After Load",
+      "description": "Run `OPTIMIZE TABLE` after each load. Required for ReplacingMergeTree upserts to collapse duplicate rows. Has performance implications on large tables.\n",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "async_insert",
+      "kind": "boolean",
+      "value": false,
+      "label": "Async Insert",
+      "description": "Enable ClickHouse server-side async inserts for the (default) HTTP driver. Coalesces inserts into larger parts to reduce part churn on high-volume ingestion. The target waits for the async insert to flush before reporting success.\n",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "load_method",
+      "kind": "options",
+      "value": "upsert",
+      "label": "Load Method",
+      "description": "The method to use when loading data into the destination. `append-only` always writes all input records; `upsert` deduplicates by primary key (via ReplacingMergeTree + `optimize_after` on ClickHouse); `overwrite` deletes all existing records and inserts the input records.\n",
+      "options": [
+        {
+          "label": "Append Only",
+          "value": "append-only"
+        },
+        {
+          "label": "Upsert",
+          "value": "upsert"
+        },
+        {
+          "label": "Overwrite",
+          "value": "overwrite"
+        }
+      ],
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "hard_delete",
+      "kind": "boolean",
+      "value": false,
+      "label": "Hard Delete",
+      "description": "When activate version is sent from a tap this specifies if we should delete the records that don't match, or mark them with a date in the `_sdc_deleted_at` column. Ignored if `process_activate_version_messages` is disabled.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "add_record_metadata",
+      "kind": "boolean",
+      "value": true,
+      "label": "Add Record Metadata",
+      "description": "Whether to add metadata columns (`_sdc_extracted_at`, `_sdc_batched_at`, and more) to every table. Must be enabled for activate-version / hard-delete to work. See https://sdk.meltano.com/en/latest/implementation/record_metadata.html\n",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "process_activate_version_messages",
+      "kind": "boolean",
+      "label": "Process `ACTIVATE_VERSION` messages",
+      "description": "Whether to process `ACTIVATE_VERSION` messages.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "batch_size_rows",
+      "kind": "integer",
+      "value": 10000,
+      "label": "Batch Size Rows",
+      "description": "When a batch of rows reaches this size, the target will load it. Note the connector also caps batches at an internal maximum tuned for ClickHouse part sizing.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "validate_records",
+      "kind": "boolean",
+      "label": "Validate Records",
+      "description": "Whether to validate the schema of the incoming streams.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "flattening_enabled",
+      "kind": "boolean",
+      "label": "Flattening Enabled",
+      "description": "'True' to enable schema flattening and automatically expand nested properties.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "flattening_max_depth",
+      "kind": "integer",
+      "label": "Flattening Max Depth",
+      "description": "The max depth to flatten schemas.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "stream_maps",
+      "kind": "object",
+      "label": "Stream Maps",
+      "description": "Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html).",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "stream_map_config",
+      "kind": "object",
+      "label": "User Stream Map Configuration",
+      "description": "User-defined config values to be used within map expressions.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "faker_config.locale",
+      "kind": "array",
+      "label": "Faker Locale",
+      "description": "One or more LCID locale strings to produce localized output for: https://faker.readthedocs.io/en/master/#localization",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "faker_config.seed",
+      "kind": "string",
+      "label": "Faker Seed",
+      "description": "Value to seed the Faker generator for deterministic output: https://faker.readthedocs.io/en/master/#seeding-the-generator",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    }
+  ]
+}

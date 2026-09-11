@@ -26,6 +26,9 @@ plugins:
   - name: target-motherduck
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/target-duckdb.git@v0.11.1 duckdb==1.5.4
+  - name: target-clickhouse
+    variant: meltanolabs
+    pip_url: "'target-clickhouse @ git+https://github.com/MeltanoLabs/target-clickhouse.git@v0.4.1'"
   transformers:
   - name: dbt
     variant: dbt-labs
