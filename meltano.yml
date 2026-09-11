@@ -19,6 +19,9 @@ plugins:
   - name: tap-aptem
     variant: matatika
     pip_url: git+https://github.com/Matatika/tap-aptem.git@v0.1.0
+  - name: tap-spreadsheets-gmail
+    variant: matatika
+    pip_url: git+https://github.com/Matatika/tap-spreadsheets-anywhere.git@v0.7.0
   loaders:
   - name: target-postgres
     variant: matatika
