@@ -9,12 +9,4 @@ sources:
     meltano-cloud:
       ingestion: meltano-cloud
   tables:
-  - name: channels
-  - name: datacomponents
-  - name: datasets
-  - name: datastores
-  - name: jobs
   - name: pipeline_jobs
-  - name: pipeline_metrics
-  - name: pipelines
-  - name: workspaces
