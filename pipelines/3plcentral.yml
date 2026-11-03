@@ -1,9 +1,0 @@
-version: pipelines/v0.1
-type: INGESTION
-label: 3PLCentral
-schedule: '@daily'
-timeout: 3600
-max_retries: 0
-data_components:
-- tap-3plcentral--3plcentral
-- Warehouse

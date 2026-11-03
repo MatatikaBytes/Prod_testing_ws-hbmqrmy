@@ -22,9 +22,6 @@ plugins:
   - name: tap-spreadsheets-gmail
     variant: matatika
     pip_url: git+https://github.com/Matatika/tap-spreadsheets-anywhere.git@v0.7.0
-  - name: tap-3plcentral
-    variant: singer-io
-    pip_url: tap-3plcentral
   loaders:
   - name: target-postgres
     variant: matatika

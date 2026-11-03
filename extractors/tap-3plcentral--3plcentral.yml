@@ -1,7 +1,0 @@
-plugins:
-  extractors:
-  - name: tap-3plcentral--3plcentral
-    inherit_from: tap-3plcentral
-    annotations:
-      meltano-cloud:
-        ingestion: 3plcentral
