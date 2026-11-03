@@ -71,3 +71,5 @@ plugins:
   - name: gdrive
     variant: matatika
     pip_url: git+https://github.com/Matatika/utility-gdrive.git@v0.2.0
+include_paths:
+- extractors/*.yml

@@ -44,6 +44,14 @@ recorded here.
 
 ## Pipelines
 
+### 3PLCentral (`3plcentral`)
+
+- **Type:** INGESTION
+- **Schedule:** `@daily`
+- **Data components:** `tap-3plcentral--3plcentral` (tap-3plcentral, singer-io) → `Warehouse` (target-postgres, matatika)
+- **Timeout:** 3600s
+- **Max retries:** 0
+
 ### Meltano cloud pipeline (`cloud-pipeline`)
 
 - **Type:** WORKFLOW
