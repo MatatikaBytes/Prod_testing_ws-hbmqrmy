@@ -72,6 +72,7 @@ recorded here.
 - **Type:** INGESTION
 - **Schedule:** `@daily`
 - **Data components:** `tap-meltano-cloud--meltano-cloud` (tap-meltano-cloud, meltanolabs) → `Warehouse` (target-postgres, matatika)
+- **Tables loaded:** `analytics.channels`, `analytics.datacomponents`, `analytics.datasets`, `analytics.datastores`, `analytics.jobs`, `analytics.pipeline_jobs`, `analytics.pipeline_metrics`, `analytics.pipelines`, `analytics.workspaces`
 - **Timeout:** 3600s
 - **Max retries:** 0
 
