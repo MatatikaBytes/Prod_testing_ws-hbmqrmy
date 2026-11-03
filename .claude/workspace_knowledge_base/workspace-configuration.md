@@ -44,6 +44,14 @@ recorded here.
 
 ## Pipelines
 
+### Abra (`abra`)
+
+- **Type:** INGESTION
+- **Schedule:** `@daily`
+- **Data components:** `tap-abra--abra` (tap-abra, hotgluexyz) → `Warehouse` (target-postgres, matatika)
+- **Timeout:** 3600s
+- **Max retries:** 0
+
 ### Meltano cloud pipeline (`cloud-pipeline`)
 
 - **Type:** WORKFLOW

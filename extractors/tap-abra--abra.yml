@@ -1,0 +1,7 @@
+plugins:
+  extractors:
+  - name: tap-abra--abra
+    inherit_from: tap-abra
+    annotations:
+      meltano-cloud:
+        ingestion: abra
