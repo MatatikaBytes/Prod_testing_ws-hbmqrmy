@@ -1,0 +1,93 @@
+{
+  "plugin_type": "extractors",
+  "name": "tap-abra",
+  "namespace": "tap_abra",
+  "variant": "hotgluexyz",
+  "label": "Abra",
+  "docs": "https://www.matatika.com/data-details/tap-abra/",
+  "repo": "https://gitlab.com/hotglue/tap-abra",
+  "pip_url": "git+https://gitlab.com/hotglue/tap-abra.git",
+  "executable": "tap-abra",
+  "description": "Abra is a mobile app that allows users to invest in cryptocurrencies and other assets.\n\nAbra is a cryptocurrency investment app that allows users to buy, sell, and hold various cryptocurrencies, as well as traditional assets like stocks and ETFs, all in one place. The app offers a user-friendly interface and allows users to fund their accounts using bank transfers, credit cards, or cryptocurrencies. Abra also offers a unique feature that allows users to invest in multiple assets at once, using a single wallet. Additionally, Abra offers a built-in exchange that allows users to convert between different cryptocurrencies and fiat currencies. Overall, Abra is a comprehensive investment app that makes it easy for users to invest in a variety of assets, including cryptocurrencies.",
+  "logo_url": "/assets/logos/extractors/abra.svg",
+  "capabilities": [
+    "about",
+    "catalog",
+    "discover",
+    "schema-flattening",
+    "state",
+    "stream-maps"
+  ],
+  "settings": [
+    {
+      "name": "flattening_enabled",
+      "kind": "boolean",
+      "label": "Flattening Enabled",
+      "description": "A setting that determines whether or not to flatten nested JSON objects in the API response.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "flattening_max_depth",
+      "kind": "integer",
+      "label": "Flattening Max Depth",
+      "description": "A setting that determines the maximum depth of nested JSON objects to flatten in the API response.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "password",
+      "kind": "string",
+      "label": "Password",
+      "description": "The password used to authenticate the user when connecting to the Abra API.",
+      "hidden": false,
+      "sensitive": true,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "start_date",
+      "kind": "date_iso8601",
+      "label": "Start Date",
+      "description": "The date from which to start streaming data from the Abra API.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "stream_map_config",
+      "kind": "object",
+      "label": "Stream Map Config",
+      "description": "A configuration file that maps the API response to a desired output format.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "stream_maps",
+      "kind": "object",
+      "label": "Stream Maps",
+      "description": "A list of stream maps that define how to map the API response to a desired output format.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    },
+    {
+      "name": "username",
+      "kind": "string",
+      "label": "Username",
+      "description": "The username used to authenticate the user when connecting to the Abra API.",
+      "hidden": false,
+      "sensitive": false,
+      "configured": false,
+      "protected": false
+    }
+  ]
+}

@@ -22,6 +22,9 @@ plugins:
   - name: tap-spreadsheets-gmail
     variant: matatika
     pip_url: git+https://github.com/Matatika/tap-spreadsheets-anywhere.git@v0.7.0
+  - name: tap-abra
+    variant: hotgluexyz
+    pip_url: git+https://gitlab.com/hotglue/tap-abra.git
   loaders:
   - name: target-postgres
     variant: matatika
