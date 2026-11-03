@@ -24,7 +24,6 @@ recorded here.
 
 ## Plugins
 
-- extractor `tap-abra` (hotgluexyz) — `git+https://gitlab.com/hotglue/tap-abra.git`
 - extractor `tap-aptem` (matatika) — `git+https://github.com/Matatika/tap-aptem.git@v0.1.0`
 - extractor `tap-meltano-cloud` (meltanolabs) — `git+https://github.com/MeltanoLabs/tap-meltano-cloud.git@v0.1.6`
 - extractor `tap-spreadsheets-gmail` (matatika) — `git+https://github.com/Matatika/tap-spreadsheets-anywhere.git@v0.7.0`
@@ -43,14 +42,6 @@ recorded here.
 - utility `matatika` (matatika) — `matatika~=1.17.1`
 
 ## Pipelines
-
-### Abra (`abra`)
-
-- **Type:** INGESTION
-- **Schedule:** `@daily`
-- **Data components:** `tap-abra--abra` (tap-abra, hotgluexyz) → `Warehouse` (target-postgres, matatika)
-- **Timeout:** 3600s
-- **Max retries:** 0
 
 ### Meltano cloud pipeline (`cloud-pipeline`)
 
