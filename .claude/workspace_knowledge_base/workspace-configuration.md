@@ -67,6 +67,14 @@ recorded here.
 - **Timeout:** 3600s
 - **Max retries:** 0
 
+### Meltano Cloud (`meltano-cloud`)
+
+- **Type:** INGESTION
+- **Schedule:** `@daily`
+- **Data components:** `tap-meltano-cloud--meltano-cloud` (tap-meltano-cloud, meltanolabs) → `Warehouse` (target-postgres, matatika)
+- **Timeout:** 3600s
+- **Max retries:** 0
+
 ### Model Lineage (`model-lineage`)
 
 - **Type:** WORKFLOW
