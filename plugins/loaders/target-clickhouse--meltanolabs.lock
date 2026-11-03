@@ -10,13 +10,13 @@
   "description": "ClickHouse is a high-performance, column-oriented SQL database management\nsystem for online analytical processing (OLAP).\n\nClickHouse stores data in columns and uses a vectorised query execution\nengine, which makes it extremely fast for analytical queries over very large\ndatasets. It supports a range of table engines (MergeTree, ReplacingMergeTree,\nReplicatedMergeTree, and others), real-time data ingestion, and standard SQL.\nClickHouse is widely used for analytics, observability, and data warehousing\nworkloads where low-latency aggregation over billions of rows is required.\n\nBecause ClickHouse does not support row-level updates natively, upsert\nbehaviour is emulated using a ReplacingMergeTree engine together with\n`OPTIMIZE TABLE`. Set `engine_type` to `ReplacingMergeTree` and enable\n`optimize_after` to deduplicate on the ordering key after each load. Note that\nClickHouse has no separate schema namespace \u2014 a database *is* the schema.\n\n### Arrow `BATCH` message support\n\nThis target accepts Arrow-encoded Singer `BATCH` messages with no additional\nconfiguration. See\n[BATCH ingestion](https://docs.meltano.com/meltano-cloud/connect-a-store/clickhouse-store/#batch-ingestion)\nfor details.\n",
   "logo_url": "/assets/logos/loaders/clickhouse.png",
   "capabilities": [
-    "hard-delete",
-    "activate-version",
     "about",
-    "structured-logging",
+    "activate-version",
+    "batch",
+    "hard-delete",
     "schema-flattening",
     "stream-maps",
-    "batch"
+    "structured-logging"
   ],
   "settings": [
     {

@@ -1,6 +1,7 @@
 version: pipelines/v0.1
+type: WORKFLOW
 label: Model Lineage
-timeout: 0
+timeout: 3600
 max_retries: 0
 data_components:
 - dbt

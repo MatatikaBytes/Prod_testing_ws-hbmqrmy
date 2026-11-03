@@ -11,10 +11,10 @@
   "description": "Sync spreadsheets data from a Gmail mailbox\n\n## Setup\n\nIn Gmail:\n1. Identify the file names/formats of email attachments you want to sync\n\nIn Meltano Cloud:\n1. Login and connect with your Google account\n1. Add Tables configuration, with respect to the identified files\n\n## Enable BATCH mode for large syncs (optional)\n\nInstead of one record message per row, the tap can buffer rows and write them to Arrow IPC\nfiles, then emit batch messages that reference them - a compatible target loads these files\ndirectly instead of processing records one at a time. Set Batch Format, Batch Root Directory\nand Batch Size to enable it.\n\n> **Caveats** \u2014 `arrow` is the only batch encoding this tap supports; only a target that\n> advertises the `batch` capability processes batch messages, so leave these settings unset\n> for any other target. Enabling BATCH mode does not otherwise change the schema seen\n> downstream - use the `arrow_native_timestamps` table definition field (see Tables) to\n> control whether a `date-time` column is typed as a native Arrow timestamp or left as a\n> string in this mode.\n",
   "logo_url": "/assets/logos/extractors/gmail.png",
   "capabilities": [
-    "discover",
-    "state",
+    "batch",
     "catalog",
-    "batch"
+    "discover",
+    "state"
   ],
   "settings": [
     {

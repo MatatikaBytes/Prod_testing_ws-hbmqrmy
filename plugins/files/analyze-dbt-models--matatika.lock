@@ -17,11 +17,11 @@
     ],
     "utilities": [
       {
-        "name": "matatika",
+        "name": "dbt-artifacts",
         "variant": "matatika"
       },
       {
-        "name": "dbt-artifacts",
+        "name": "matatika",
         "variant": "matatika"
       }
     ]

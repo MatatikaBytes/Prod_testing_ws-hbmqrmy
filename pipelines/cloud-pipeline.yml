@@ -1,6 +1,7 @@
 version: pipelines/v0.1
+type: WORKFLOW
 label: Meltano cloud pipeline
-timeout: 0
+timeout: 3600
 max_retries: 1
 data_components:
 - tap-meltano-cloud

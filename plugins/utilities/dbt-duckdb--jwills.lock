@@ -129,13 +129,13 @@
     },
     "initialize": {
       "args": "initialize",
-      "description": "Initialize a new dbt project. This will create a dbt_project.yml file, a profiles.yml file, and models directory.\n",
-      "executable": "dbt_extension"
+      "executable": "dbt_extension",
+      "description": "Initialize a new dbt project. This will create a dbt_project.yml file, a profiles.yml file, and models directory.\n"
     },
     "describe": {
       "args": "describe",
-      "description": "Describe the",
-      "executable": "dbt_extension"
+      "executable": "dbt_extension",
+      "description": "Describe the"
     },
     "snapshot": {
       "args": "snapshot",
