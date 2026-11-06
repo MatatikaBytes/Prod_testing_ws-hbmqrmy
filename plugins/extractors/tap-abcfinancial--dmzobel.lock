@@ -1,0 +1,17 @@
+{
+  "plugin_type": "extractors",
+  "name": "tap-abcfinancial",
+  "namespace": "tap_abcfinancial",
+  "variant": "dmzobel",
+  "label": "ABC Fitness Solutions",
+  "docs": "https://www.matatika.com/data-details/tap-abcfinancial/",
+  "repo": "https://github.com/dmzobel/tap-abcfinancial",
+  "pip_url": "git+https://github.com/dmzobel/tap-abcfinancial.git",
+  "description": "ABC Fitness Solutions: A software solution for fitness businesses to manage their operations and engage with their clients.\n\nABC Fitness Solutions is a comprehensive software solution designed for fitness businesses to manage their operations and engage with their clients. The platform offers features such as membership management, scheduling, billing, and reporting, as well as tools for client communication and engagement, such as mobile apps and social media integration. With ABC Fitness Solutions, fitness businesses can streamline their operations, improve client retention, and grow their business.",
+  "logo_url": "/assets/logos/extractors/abcfinancial.png",
+  "capabilities": [
+    "catalog",
+    "discover",
+    "state"
+  ]
+}

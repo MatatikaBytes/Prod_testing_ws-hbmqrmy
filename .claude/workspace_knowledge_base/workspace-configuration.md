@@ -13,6 +13,7 @@ recorded here.
 ## Settings
 
 - **Name:** Prod_testing_ws
+- **Workspace ID:** `420b8d45-f6f3-4b52-a8b4-a53cfd58ffe7`
 - **Default environment:** dev
 - **Default data store:** Warehouse
 - **State data store:** Warehouse
@@ -24,6 +25,7 @@ recorded here.
 
 ## Plugins
 
+- extractor `tap-abcfinancial` (dmzobel) — `git+https://github.com/dmzobel/tap-abcfinancial.git`
 - extractor `tap-aptem` (matatika) — `git+https://github.com/Matatika/tap-aptem.git@v0.1.0`
 - extractor `tap-meltano-cloud` (meltanolabs) — `git+https://github.com/MeltanoLabs/tap-meltano-cloud.git@v0.1.6`
 - extractor `tap-spreadsheets-gmail` (matatika) — `git+https://github.com/Matatika/tap-spreadsheets-anywhere.git@v0.7.0`
